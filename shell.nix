@@ -5,7 +5,6 @@ pkgs.mkShell {
     gdal
     git
     git-lfs
-    nginx
   ];
 
   shellHook = ''
