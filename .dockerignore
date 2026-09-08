@@ -1,0 +1,6 @@
+.git
+build
+tiles
+qgis
+*.aux.xml
+
