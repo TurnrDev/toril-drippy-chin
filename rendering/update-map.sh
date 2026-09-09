@@ -1,6 +1,9 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+exec 9>/tmp/dnd-map-update.lock
+flock -n 9 || exit 0
+
 echo "Exporting OSM data from Rails..."
 
 docker compose exec -T rails \
