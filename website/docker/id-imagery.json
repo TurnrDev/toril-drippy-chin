@@ -3,7 +3,7 @@
     "id": "toril",
     "name": "Toril",
     "type": "tms",
-    "template": "https://tiles.dnd.turnr.net/imagery/{zoom}/{x}/{y}.png",
+    "template": "https://tiles.dnd.turnr.net/imagery/combined/{zoom}/{x}/{y}.png",
     "category": "map",
     "zoomExtent": [0, 20],
     "best": true
