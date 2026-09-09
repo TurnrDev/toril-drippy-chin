@@ -68,10 +68,10 @@ services:
 
   tiles:
     build:
-      context: ./toril_drippy_chin
+      context: ./imagery
     container_name: dnd_tiles
     volumes:
-      - ./toril_drippy_chin/tiles:/usr/share/nginx/html:ro
+      - ./imagery/tiles:/usr/share/nginx/html:ro
     restart: unless-stopped
 
     labels:
