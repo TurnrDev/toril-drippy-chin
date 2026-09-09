@@ -94,5 +94,18 @@ services:
       - website
     entrypoint: ["sleep", "infinity"]
 
+  renderer:
+    build:
+      context: ./rendering
+    container_name: dnd_map_renderer
+    volumes:
+      - ./rendering/openstreetmap-carto:/openstreetmap-carto:ro
+    networks:
+      - website
+    depends_on:
+      db:
+        condition: service_healthy
+    entrypoint: ["sleep", "infinity"]
+
 volumes:
   web-tmp:
