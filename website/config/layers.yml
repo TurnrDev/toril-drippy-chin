@@ -5,4 +5,4 @@
   canEmbed: true
   canDownloadImage: true
   maxZoom: 20
-  tileUrl: "https://tiles.dnd.turnr.net/combined/{z}/{x}/{y}.png"
+  tileUrl: "https://tiles.dnd.turnr.net/imagery/{z}/{x}/{y}.png"
