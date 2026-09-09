@@ -1,0 +1,8 @@
+- leafletOsmId: "Toril"
+  code: "M"
+  layerId: "toril"
+  nameId: "standard"
+  canEmbed: true
+  canDownloadImage: true
+  maxZoom: 20
+  tileUrl: "https://tiles.dnd.turnr.net/combined/{z}/{x}/{y}.png"

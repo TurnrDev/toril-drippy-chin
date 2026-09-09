@@ -1,0 +1,20 @@
+{
+	"name": "DrippyMap",
+	"short_name": "DrippyMap",
+	"icons": <%= [36, 48, 72, 96, 144, 192].map { |res| {
+			src: image_path("android-chrome-#{res}x#{res}.png"),
+			sizes: "#{res}x#{res}",
+			type: "image/png",
+			density: res.to_f / 48
+		} }.to_json %>,
+	"start_url": "/",
+	"theme_color": "#12b8c4",
+	"background_color": "#fff",
+	"display": "minimal-ui",
+	"protocol_handlers": [
+		{
+			"protocol": "geo",
+			"url": "/?geouri=%s"
+		}
+	]
+}
