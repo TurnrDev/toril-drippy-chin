@@ -81,7 +81,8 @@ services:
     container_name: dnd_tiles
     volumes:
       - ./rendering/openstreetmap-carto:/openstreetmap-carto:ro
-      - ./imagery/tiles:/var/www/imagery:ro
+      - ./rendering/project.mml:/project.mml:ro
+      - ./imagery/tiles/combined:/var/www/imagery:ro
     networks:
       - website
       - web
