@@ -82,6 +82,7 @@ services:
     volumes:
       - ./rendering/openstreetmap-carto:/openstreetmap-carto:ro
       - ./rendering/project.mml:/openstreetmap-carto/project.mml:ro
+      - ./rendering/project.xml:/project.xml:ro
       - ./imagery/tiles/combined:/var/www/imagery:ro
     networks:
       - website
