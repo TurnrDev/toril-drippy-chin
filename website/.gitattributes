@@ -1,1 +1,73 @@
 * text=auto eol=lf
+
+# This directory is a vendored copy of openstreetmap-website. Keep the local
+# changes made after ae669875842a87da8cf1b94e725f622d830c69d4 visible to
+# GitHub Linguist, but exclude the rest from language statistics and diffs.
+** linguist-vendored
+
+Dockerfile linguist-vendored=false
+app/assets/favicons/android-chrome-144x144.png linguist-vendored=false
+app/assets/favicons/android-chrome-192x192.png linguist-vendored=false
+app/assets/favicons/android-chrome-36x36.png linguist-vendored=false
+app/assets/favicons/android-chrome-48x48.png linguist-vendored=false
+app/assets/favicons/android-chrome-72x72.png linguist-vendored=false
+app/assets/favicons/android-chrome-96x96.png linguist-vendored=false
+app/assets/favicons/apple-touch-icon-114x114.png linguist-vendored=false
+app/assets/favicons/apple-touch-icon-120x120.png linguist-vendored=false
+app/assets/favicons/apple-touch-icon-144x144.png linguist-vendored=false
+app/assets/favicons/apple-touch-icon-152x152.png linguist-vendored=false
+app/assets/favicons/apple-touch-icon-180x180.png linguist-vendored=false
+app/assets/favicons/apple-touch-icon-57x57.png linguist-vendored=false
+app/assets/favicons/apple-touch-icon-60x60.png linguist-vendored=false
+app/assets/favicons/apple-touch-icon-72x72.png linguist-vendored=false
+app/assets/favicons/apple-touch-icon-76x76.png linguist-vendored=false
+app/assets/favicons/apple-touch-icon-precomposed.png linguist-vendored=false
+app/assets/favicons/apple-touch-icon.png linguist-vendored=false
+app/assets/favicons/favicon-16x16.png linguist-vendored=false
+app/assets/favicons/favicon-194x194.png linguist-vendored=false
+app/assets/favicons/favicon-32x32.png linguist-vendored=false
+app/assets/favicons/favicon-96x96.png linguist-vendored=false
+app/assets/favicons/favicon.ico linguist-vendored=false
+app/assets/favicons/manifest.json.erb linguist-vendored=false
+app/assets/favicons/mstile-144x144.png linguist-vendored=false
+app/assets/favicons/mstile-150x150.png linguist-vendored=false
+app/assets/favicons/mstile-310x150.png linguist-vendored=false
+app/assets/favicons/mstile-310x310.png linguist-vendored=false
+app/assets/favicons/mstile-70x70.png linguist-vendored=false
+app/assets/images/drippymap_logo_100.png linguist-vendored=false
+app/assets/images/drippymap_logo_256.png linguist-vendored=false
+app/assets/images/drippymap_logo_30.png linguist-vendored=false
+app/assets/images/tab-icon.svg linguist-vendored=false
+app/assets/stylesheets/parameters.scss linguist-vendored=false
+app/controllers/concerns/session_methods.rb linguist-vendored=false
+app/controllers/users_controller.rb linguist-vendored=false
+app/helpers/open_graph_helper.rb linguist-vendored=false
+app/mailers/user_mailer.rb linguist-vendored=false
+app/models/message.rb linguist-vendored=false
+app/views/changesets/index.atom.builder linguist-vendored=false
+app/views/diary_entries/rss.rss.builder linguist-vendored=false
+app/views/layouts/_header.html.erb linguist-vendored=false
+app/views/layouts/_meta.html.erb linguist-vendored=false
+app/views/layouts/error.html.erb linguist-vendored=false
+app/views/layouts/map.html.erb linguist-vendored=false
+app/views/layouts/user_mailer.html.erb linguist-vendored=false
+app/views/sessions/new.html.erb linguist-vendored=false
+app/views/site/about.html.erb linguist-vendored=false
+app/views/site/fixthemap.html.erb linguist-vendored=false
+app/views/traces/feeds/show.rss.builder linguist-vendored=false
+config/locales/en.yml linguist-vendored=false
+config/settings.yml linguist-vendored=false
+config/settings/test.yml linguist-vendored=false
+docker/id-imagery.json linguist-vendored=false
+test/controllers/api/changeset_comments_controller_test.rb linguist-vendored=false
+test/controllers/api/notes_controller_test.rb linguist-vendored=false
+test/controllers/diary_comments_controller_test.rb linguist-vendored=false
+test/controllers/diary_entries_controller_test.rb linguist-vendored=false
+test/controllers/messages/replies_controller_test.rb linguist-vendored=false
+test/controllers/messages_controller_test.rb linguist-vendored=false
+test/controllers/users_controller_test.rb linguist-vendored=false
+test/helpers/title_helper_test.rb linguist-vendored=false
+test/models/message_test.rb linguist-vendored=false
+test/system/account_home_test.rb linguist-vendored=false
+test/system/site_test.rb linguist-vendored=false
+test/system/user_logout_test.rb linguist-vendored=false
