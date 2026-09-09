@@ -7,6 +7,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     libapache2-mod-tile \
     python3 \
     python3-yaml \
+    python3-requests \
+    python3-psycopg2 \
     fonts-dejavu-core \
     fonts-noto-core \
     fonts-noto-cjk \
