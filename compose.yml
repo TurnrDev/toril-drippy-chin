@@ -51,8 +51,6 @@ services:
       context: ./website
       dockerfile: docker/postgres/Dockerfile
     container_name: dnd_map_db
-    # ports:
-    #   - "54321:5432"
     environment:
       POSTGRES_HOST_AUTH_METHOD: trust
       POSTGRES_DB: openstreetmap
@@ -91,7 +89,7 @@ services:
     container_name: osm2pgsql
     volumes:
       - /data/appdata/dnd_map/scratch:/data
-    - ./rendering/openstreetmap-carto:/openstreetmap-carto:ro
+      - ./rendering/openstreetmap-carto:/openstreetmap-carto:ro
     networks:
       - website
     entrypoint: ["sleep", "infinity"]
