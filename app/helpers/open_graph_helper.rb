@@ -33,7 +33,7 @@ module OpenGraphHelper
       # return default image
     end
     {
-      "og:image" => image_url("osm_logo_256.png"),
+      "og:image" => image_url("drippymap_logo_256.png"),
       "og:image:alt" => t("layouts.logo.alt_text")
     }
   end

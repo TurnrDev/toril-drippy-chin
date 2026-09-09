@@ -661,10 +661,10 @@ class DiaryEntriesControllerTest < ActionDispatch::IntegrationTest
     get diary_entry_path(user, diary_entry)
     assert_response :success
     assert_dom "head meta[property='og:image']" do
-      assert_dom "> @content", ActionController::Base.helpers.image_url("osm_logo_256.png", :host => root_url)
+      assert_dom "> @content", ActionController::Base.helpers.image_url("drippymap_logo_256.png", :host => root_url)
     end
     assert_dom "head meta[property='og:image:alt']" do
-      assert_dom "> @content", "OpenStreetMap logo"
+      assert_dom "> @content", "DrippyMap logo"
     end
   end
 
@@ -731,10 +731,10 @@ class DiaryEntriesControllerTest < ActionDispatch::IntegrationTest
     get diary_entry_path(user, diary_entry)
     assert_response :success
     assert_dom "head meta[property='og:image']" do
-      assert_dom "> @content", ActionController::Base.helpers.image_url("osm_logo_256.png", :host => root_url)
+      assert_dom "> @content", ActionController::Base.helpers.image_url("drippymap_logo_256.png", :host => root_url)
     end
     assert_dom "head meta[property='og:image:alt']" do
-      assert_dom "> @content", "OpenStreetMap logo"
+      assert_dom "> @content", "DrippyMap logo"
     end
   end
 

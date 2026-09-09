@@ -56,7 +56,7 @@ class Message < ApplicationRecord
       :sender => from,
       :recipient => to,
       :sent_on => mail.date.new_offset(0),
-      :title => mail.subject.sub(/\[OpenStreetMap\] */, ""),
+      :title => mail.subject.sub(/\[(?:OpenStreetMap|DrippyMap)\] */, ""),
       :body => body,
       :body_format => "text"
     )
