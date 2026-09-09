@@ -85,5 +85,16 @@ services:
     networks:
       - web
 
+  osm2pgsql:
+    image: iboates/osm2pgsql:latest
+    profiles:
+      - tools
+    networks:
+      - default
+    volumes:
+      - ./data:/data
+    entrypoint: ["sleep", "infinity"]
+
 volumes:
   web-tmp:
+https://www.ebay.co.uk/itm/128070384753?_skw=x52+pro&itmmeta=01M23Z2CTY0FPWBXXV4F9MVET1&hash=item1dd196fc71:g:MyMAAeSwi01qoUg~&itmprp=enc%3AAQALAAAA4GfYFPkwiKCW4ZNSs2u11xCplLr41aUoT%2FdvZbPLAennFzwVAfQlH6uuVW4snPUX4JVtOEG0ZIFhYibCCl3d790EkMAoIw4enXWZmVXsN2sYos0qNQyxhL5gCkpkNHwYbiEqbgxThlbRfjQQJUHswYzWQKbiLJmfquxd1qKdYQhjQbxgCwTobDLtMC7GpDkOA6%2FVdWKzIOnJiLGBORhMnFvAvziEp%2F1UyWpLiBuiEhrw8knHLsV4JFJAybmpl95F5i8IjxVC92aSDFyVo2JEQM9mHdexAyQBftMEUsjWKoSU%7Ctkp%3ABk9SR_bNif-QaA
