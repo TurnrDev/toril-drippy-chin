@@ -91,6 +91,7 @@ services:
     container_name: osm2pgsql
     volumes:
       - /data/appdata/dnd_map/scratch:/data
+    - ./rendering/openstreetmap-carto:/openstreetmap-carto:ro
     networks:
       - website
     entrypoint: ["sleep", "infinity"]
