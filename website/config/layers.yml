@@ -5,4 +5,13 @@
   canEmbed: true
   canDownloadImage: true
   maxZoom: 20
-  tileUrl: "https://tiles.dnd.turnr.net/imagery/combined/{z}/{x}/{y}.png"
+  tileUrl: "https://tiles.dnd.turnr.net/map/{z}/{x}/{y}.png"
+
+- leafletOsmId: "Satellite"
+  code: "S"
+  layerId: "satellite"
+  nameId: "satellite"
+  canEmbed: true
+  canDownloadImage: true
+  maxZoom: 20
+  tileUrl: "https://tiles.dnd.turnr.net/imagery/{z}/{x}/{y}.png"
