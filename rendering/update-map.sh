@@ -24,4 +24,9 @@ docker compose exec -T renderer \
     -U openstreetmap \
     /data/toril.osm
 
+echo "Clearing rendered tile cache..."
+
+docker compose exec -T renderer \
+  sh -c 'rm -rf /var/cache/renderd/tiles/*'
+
 echo "Rendering database updated."
