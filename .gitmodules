@@ -1,0 +1,3 @@
+[submodule "rendering/openstreetmap-carto"]
+	path = rendering/openstreetmap-carto
+	url = https://github.com/gravitystorm/openstreetmap-carto.git
