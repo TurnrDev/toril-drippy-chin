@@ -248,6 +248,8 @@ class UsersController < ApplicationController
   ##
   # check signup acls
   def check_signup_allowed?(email = nil)
+    return false unless Settings.signup_enabled
+
     domain = if email.nil?
                nil
              else

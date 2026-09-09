@@ -11,7 +11,7 @@
   <% end %>
 
   <div class="d-flex align-items-end">
-    <% unless @hide_signup %>
+    <% unless @hide_signup || !Settings.signup_enabled %>
       <ul class="nav nav-tabs fs-6">
         <li class="nav-item">
           <%= tag.span t("sessions.new.tab_title"), :class => "nav-link active" %>

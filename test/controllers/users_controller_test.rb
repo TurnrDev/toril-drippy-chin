@@ -70,6 +70,15 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to "/test"
   end
 
+  def test_new_when_signup_is_disabled
+    with_settings(:signup_enabled => false) do
+      get new_user_path, :params => { :cookie_test => "true" }
+    end
+
+    assert_response :success
+    assert_template "blocked"
+  end
+
   def test_create_success
     user = build(:user, :pending)
 

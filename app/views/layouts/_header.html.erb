@@ -75,7 +75,7 @@
           </div>
         </div>
       <% else %>
-        <% unless hide_signup %>
+        <% unless hide_signup || !Settings.signup_enabled %>
           <div class="d-flex btn-group login-menu">
             <%= link_to t(".log_in"), login_path(:referer => request.fullpath), :class => "geolink btn btn-outline-secondary" %>
             <%= link_to t(".sign_up"), new_user_path, :class => "btn btn-outline-secondary" %>

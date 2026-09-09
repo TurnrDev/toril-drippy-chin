@@ -247,6 +247,8 @@ smtp_password: null
 # Matomo settings for analytics
 #matomo:
 # Signup rate limits
+# Set to false to disable new account registrations site-wide.
+signup_enabled: false
 #signup_ip_per_day:
 #signup_ip_max_burst:
 #signup_email_per_day:
