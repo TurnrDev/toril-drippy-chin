@@ -20,7 +20,7 @@ services:
       - web-tmp:/app/tmp
       # Mount a storage directory that will persist between runs
       - /data/appdata/dnd_map/website:/app/storage
-      - /data/appdata/dnd_map/scratch:/data
+      - /data/scratch/dnd_map:/data
     tmpfs:
       /tmp/pids/
     labels:
@@ -78,7 +78,7 @@ services:
       - ./rendering/project.mml:/openstreetmap-carto/project.mml:ro
       - ./rendering/project.xml:/project.xml:ro
       - ./rendering/renderd.conf:/etc/renderd.conf:ro
-      - /data/appdata/dnd_map/scratch:/data
+      - /data/scratch/dnd_map:/data
     networks:
       - website
       - web
