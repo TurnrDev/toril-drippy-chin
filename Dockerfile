@@ -54,6 +54,14 @@ COPY package.json yarn.lock /app/
 COPY bin/yarn /app/bin/
 RUN bin/yarn install
 
+# Add adjustments
+COPY docker/id-imagery.json /tmp/id-imagery.json
+
+RUN cp /tmp/id-imagery.json \
+  node_modules/@openstreetmap/id/dist/data/imagery.min.json \
+  && cp /tmp/id-imagery.json \
+  node_modules/@openstreetmap/id/data/imagery.json
+
 # Copy and set entrypoint
 COPY docker/entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh

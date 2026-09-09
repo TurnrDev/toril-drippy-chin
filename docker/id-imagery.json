@@ -1,0 +1,11 @@
+[
+  {
+    "id": "toril",
+    "name": "Toril",
+    "type": "tms",
+    "template": "https://tiles.dnd.turnr.net/combined/{zoom}/{x}/{y}.png",
+    "category": "map",
+    "zoomExtent": [0, 20],
+    "best": true
+  }
+]
