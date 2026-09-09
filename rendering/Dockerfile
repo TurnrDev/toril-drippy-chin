@@ -1,6 +1,7 @@
 FROM debian:trixie-slim
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
+    apache2 \
     node-carto \
     renderd \
     libapache2-mod-tile \
@@ -8,6 +9,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     fonts-noto-core \
     fonts-noto-cjk \
     ca-certificates \
+    curl \
     && a2enmod headers \
     && rm -rf /var/lib/apt/lists/*
 
