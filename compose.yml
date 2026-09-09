@@ -1,0 +1,89 @@
+networks:
+  web:
+    external: true
+  website:
+    driver: bridge
+    name: website
+
+services:
+  rails:
+    build:
+      context: ./website
+    environment:
+      PIDFILE: /tmp/pids/server.pid
+    container_name: dnd_map_rails
+    volumes:
+      - ./website:/app
+      # Prevent these directories from mounting so they're not shared between host OS and Docker
+      - /app/node_modules/
+      # Mount a tmp directory that will persist between runs
+      - web-tmp:/app/tmp
+      # Mount a storage directory that will persist between runs
+      - /data/appdata/dnd_map/website:/app/storage
+    tmpfs:
+      /tmp/pids/
+    labels:
+      homepage.description: D&D Map
+      homepage.group: D&D
+      homepage.href: https://map.dnd.turnr.net
+      homepage.name: D&D Map
+      homepage.showStats: true
+      homepage.siteMonitor: http://dnd_map_rails:8000
+      traefik.enable: true
+      traefik.http.routers.dnd_map_rails.entrypoints: public
+      traefik.http.routers.dnd_map_rails.rule: Host(`map.dnd.turnr.net`)
+      traefik.http.routers.dnd_map_rails.tls: true
+      traefik.http.routers.dnd_map_rails.tls.certresolver: cloudflare
+      traefik.http.services.dnd_map_rails.loadbalancer.server.port: 3000
+    stdin_open: true
+    tty: true
+    command: bundle exec rails s -p 3000 -b '0.0.0.0'
+    networks:
+      - web
+      - website
+    depends_on:
+      db:
+        condition: service_healthy
+
+  db:
+    build:
+      context: ./website
+      dockerfile: docker/postgres/Dockerfile
+    container_name: dnd_map_db
+    # ports:
+    #   - "54321:5432"
+    environment:
+      POSTGRES_HOST_AUTH_METHOD: trust
+      POSTGRES_DB: openstreetmap
+    volumes:
+      # Mount the Postgres data directory so it persists between runs
+      - /data/appdata/dnd_map/db-data:/var/lib/postgresql/data
+    networks:
+      - website
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+
+  tiles:
+    build:
+      context: ./toril_drippy_chin
+    container_name: dnd_tiles
+    volumes:
+      - ./toril_drippy_chin/tiles:/usr/share/nginx/html:ro
+    restart: unless-stopped
+
+    labels:
+      traefik.enable: true
+      traefik.http.routers.dnd_tiles.entrypoints: public
+      traefik.http.routers.dnd_tiles.rule: Host(`tiles.dnd.turnr.net`)
+      traefik.http.routers.dnd_tiles.tls: true
+      traefik.http.routers.dnd_tiles.tls.certresolver: cloudflare
+      traefik.http.services.dnd_tiles.loadbalancer.server.port: 80
+
+    networks:
+      - web
+
+volumes:
+  web-tmp:
