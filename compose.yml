@@ -89,12 +89,12 @@ services:
   osm2pgsql:
     image: iboates/osm2pgsql:latest
     container_name: osm2pgsql
-    profiles:
-      - tools
     networks:
       - default
     volumes:
       - /data/appdata/dnd_map/scratch:/data
+    networks:
+      - website
     entrypoint: ["sleep", "infinity"]
 
 volumes:
