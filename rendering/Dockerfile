@@ -5,6 +5,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     node-carto \
     renderd \
     libapache2-mod-tile \
+    osm2pgsql \
     python3 \
     python3-yaml \
     python3-requests \

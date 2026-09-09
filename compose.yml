@@ -65,21 +65,12 @@ services:
       timeout: 5s
       retries: 20
 
-  osm2pgsql:
-    image: iboates/osm2pgsql:latest
-    container_name: osm2pgsql
-    volumes:
-      - /data/appdata/dnd_map/scratch:/data
-      - ./rendering/openstreetmap-carto:/openstreetmap-carto:ro
-    networks:
-      - website
-    entrypoint: ["sleep", "infinity"]
-
   renderer:
     build:
       context: ./rendering
     container_name: dnd_tiles
     volumes:
+      - /data/appdata/dnd_map/scratch:/data
       - ./rendering/openstreetmap-carto:/openstreetmap-carto:ro
       - ./rendering/openstreetmap-carto/symbols:/symbols:ro
       - ./rendering/openstreetmap-carto/patterns:/patterns:ro
