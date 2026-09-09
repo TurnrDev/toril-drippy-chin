@@ -16,14 +16,15 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     fonts-noto-cjk \
     ca-certificates \
     curl \
-    && a2enmod headers \
+    && a2enmod headers tile \
     && rm -rf /var/lib/apt/lists/*
 
 COPY apache.conf /etc/apache2/conf-available/dnd-tiles.conf
-
 RUN a2enconf dnd-tiles
-RUN mkdir -p /run/renderd
 
 WORKDIR /openstreetmap-carto
 
-CMD ["apache2ctl", "-D", "FOREGROUND"]
+COPY entrypoint.sh /usr/local/bin/entrypoint.sh
+RUN chmod +x /usr/local/bin/entrypoint.sh
+
+CMD ["/usr/local/bin/entrypoint.sh"]
