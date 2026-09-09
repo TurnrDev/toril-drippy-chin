@@ -16,6 +16,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 COPY apache.conf /etc/apache2/conf-available/dnd-tiles.conf
 
 RUN a2enconf dnd-tiles
+RUN mkdir -p /run/renderd
 
 WORKDIR /openstreetmap-carto
 
