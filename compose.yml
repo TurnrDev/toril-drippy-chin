@@ -20,6 +20,7 @@ services:
       - web-tmp:/app/tmp
       # Mount a storage directory that will persist between runs
       - /data/appdata/dnd_map/website:/app/storage
+      - /data/appdata/dnd_map/scratch:/data
     tmpfs:
       /tmp/pids/
     labels:
@@ -92,7 +93,7 @@ services:
     networks:
       - default
     volumes:
-      - ./data:/data
+      - /data/appdata/dnd_map/scratch:/data
     entrypoint: ["sleep", "infinity"]
 
 volumes:
