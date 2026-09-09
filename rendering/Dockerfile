@@ -8,8 +8,13 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     fonts-noto-core \
     fonts-noto-cjk \
     ca-certificates \
+    && a2enmod headers \
     && rm -rf /var/lib/apt/lists/*
+
+COPY apache.conf /etc/apache2/conf-available/dnd-tiles.conf
+
+RUN a2enconf dnd-tiles
 
 WORKDIR /openstreetmap-carto
 
-CMD ["sleep", "infinity"]
+CMD ["apache2ctl", "-D", "FOREGROUND"]

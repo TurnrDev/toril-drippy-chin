@@ -65,25 +65,6 @@ services:
       timeout: 5s
       retries: 20
 
-  tiles:
-    build:
-      context: ./imagery
-    container_name: dnd_tiles
-    volumes:
-      - ./imagery/tiles:/usr/share/nginx/html:ro
-    restart: unless-stopped
-
-    labels:
-      traefik.enable: true
-      traefik.http.routers.dnd_tiles.entrypoints: public
-      traefik.http.routers.dnd_tiles.rule: Host(`tiles.dnd.turnr.net`)
-      traefik.http.routers.dnd_tiles.tls: true
-      traefik.http.routers.dnd_tiles.tls.certresolver: cloudflare
-      traefik.http.services.dnd_tiles.loadbalancer.server.port: 80
-
-    networks:
-      - web
-
   osm2pgsql:
     image: iboates/osm2pgsql:latest
     container_name: osm2pgsql
@@ -94,18 +75,26 @@ services:
       - website
     entrypoint: ["sleep", "infinity"]
 
-  renderer:
-    build:
-      context: ./rendering
-    container_name: dnd_map_renderer
-    volumes:
-      - ./rendering/openstreetmap-carto:/openstreetmap-carto:ro
-    networks:
-      - website
-    depends_on:
-      db:
-        condition: service_healthy
-    entrypoint: ["sleep", "infinity"]
+renderer:
+  build:
+    context: ./rendering
+  container_name: dnd_tiles
+  volumes:
+    - ./rendering/openstreetmap-carto:/openstreetmap-carto:ro
+    - ./imagery/tiles:/var/www/imagery:ro
+  networks:
+    - website
+    - web
+  depends_on:
+    db:
+      condition: service_healthy
+  labels:
+    traefik.enable: true
+    traefik.http.routers.dnd_tiles.entrypoints: public
+    traefik.http.routers.dnd_tiles.rule: Host(`tiles.dnd.turnr.net`)
+    traefik.http.routers.dnd_tiles.tls: true
+    traefik.http.routers.dnd_tiles.tls.certresolver: cloudflare
+    traefik.http.services.dnd_tiles.loadbalancer.server.port: 80
 
 volumes:
   web-tmp:
