@@ -1,0 +1,5 @@
+# JOSM working files
+*.jos
+
+# Generated OSM import files
+*.osm
