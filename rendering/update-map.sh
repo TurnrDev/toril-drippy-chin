@@ -37,6 +37,7 @@ docker compose exec -T db psql \
 BEGIN;
 
 DROP TABLE IF EXISTS water_polygons_new;
+DROP TABLE IF EXISTS simplified_water_polygons_new;
 
 CREATE TABLE water_polygons_new AS
 WITH land AS (
@@ -57,14 +58,21 @@ SELECT
     ST_Multi(
         ST_Difference(world.geom, land.geom)
     )::geometry(MultiPolygon, 3857) AS way
-FROM world, land;
+FROM world, land
+WHERE land.geom IS NOT NULL;
 
-CREATE INDEX water_polygons_new_way_idx
-    ON water_polygons_new
-    USING GIST (way);
-
-
-DROP TABLE IF EXISTS simplified_water_polygons_new;
+DO $$
+BEGIN
+    IF NOT EXISTS (
+        SELECT 1
+        FROM water_polygons_new
+        WHERE way IS NOT NULL
+          AND NOT ST_IsEmpty(way)
+    ) THEN
+        RAISE EXCEPTION 'No valid water polygon generated from OSM land data';
+    END IF;
+END
+$$;
 
 CREATE TABLE simplified_water_polygons_new AS
 SELECT
@@ -73,11 +81,6 @@ SELECT
     )::geometry(MultiPolygon, 3857) AS way
 FROM water_polygons_new;
 
-CREATE INDEX simplified_water_polygons_new_way_idx
-    ON simplified_water_polygons_new
-    USING GIST (way);
-
-
 DROP TABLE IF EXISTS water_polygons;
 ALTER TABLE water_polygons_new
     RENAME TO water_polygons;
@@ -85,6 +88,14 @@ ALTER TABLE water_polygons_new
 DROP TABLE IF EXISTS simplified_water_polygons;
 ALTER TABLE simplified_water_polygons_new
     RENAME TO simplified_water_polygons;
+
+CREATE INDEX water_polygons_way_idx
+    ON water_polygons
+    USING GIST (way);
+
+CREATE INDEX simplified_water_polygons_way_idx
+    ON simplified_water_polygons
+    USING GIST (way);
 
 COMMIT;
 
