@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="An illustrated visitor guide to Murann, the jewel of the Lake of Steam.">
+    <title>Visit Murann | City of Adventure</title>
+    <link rel="stylesheet" href="site.css">
+  </head>
+  <body>
+    <header class="hero">
+      <div class="eyebrow">The Now Capital City of Faerûn · City of Innovation</div>
+      <h1>Visit Murann</h1>
+      <p>Where sea lanes, spice markets, and a hundred unlikely adventures meet.</p>
+      <a class="map-link" href="#map">Explore the city map <span aria-hidden="true">↓</span></a>
+    </header>
+
+    <main>
+      <section class="welcome" aria-labelledby="welcome-title">
+        <p class="section-label">A harbour unlike any other</p>
+        <h2 id="welcome-title">Make Murann your next great story.</h2>
+        <p>Wander lantern-lit quays, lose an afternoon among the busy bazaars, and find a warm welcome in the city that never quite tells all its secrets.</p>
+      </section>
+
+      <section class="map-section" id="map" aria-labelledby="map-title">
+        <div class="map-copy">
+          <p class="section-label">Visitor’s map</p>
+          <h2 id="map-title">Find your way around</h2>
+          <p>Open the illustrated city map for a closer look. Scroll or pinch to zoom, then drag to explore every district.</p>
+          <button class="map-button" type="button" data-open-map>Open full-screen map</button>
+        </div>
+        <button class="map-preview" type="button" data-open-map aria-label="Open the full-screen Murann city map">
+          <img src="assets/murann-map.png" alt="Illustrated map of Murann">
+          <span>Click to explore <b aria-hidden="true">↗</b></span>
+        </button>
+      </section>
+
+      <section class="guide" aria-label="Murann visitor highlights">
+        <article><span>01</span><h2>By the water</h2><p>Arrive by ship, stay for the salt air and sunset bustle of the harbour.</p></article>
+        <article><span>02</span><h2>Local flavour</h2><p>Sample market treats, trade stories, and take home something extraordinary.</p></article>
+        <article><span>03</span><h2>Make a discovery</h2><p>Every winding street offers a different view — and possibly a new quest.</p></article>
+      </section>
+    </main>
+
+    <footer>Visit Murann · A city worth getting lost in</footer>
+
+    <dialog class="map-dialog" aria-labelledby="dialog-title">
+      <div class="dialog-bar">
+        <div><strong id="dialog-title">Murann city map</strong><span>Scroll or pinch to zoom · drag to pan</span></div>
+        <div class="map-controls"><button type="button" data-zoom-in aria-label="Zoom in">+</button><button type="button" data-zoom-out aria-label="Zoom out">−</button><button type="button" data-zoom-reset>Reset</button><button type="button" data-close-map aria-label="Close map">×</button></div>
+      </div>
+      <div class="map-viewport"><img src="assets/murann-map.png" alt="Detailed illustrated map of Murann" draggable="false"></div>
+    </dialog>
+    <script src="site.js"></script>
+  </body>
+</html>

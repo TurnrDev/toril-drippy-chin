@@ -33,3 +33,18 @@ git pull
 git submodule update --init --recursive
 git lfs pull
 ```
+
+## Visit Murann
+
+The `visit-murann` service publishes a static nginx site at
+`https://visit-murann.dnd.turnr.net`. It is routed through the existing
+external `web` Traefik network and requests its TLS certificate using the
+existing Cloudflare resolver.
+
+Deploy just this site with:
+
+```sh
+docker compose up -d --build visit-murann
+```
+
+The full-resolution city map is available at `/assets/murann-map.png`.

@@ -6,6 +6,25 @@ networks:
     name: website
 
 services:
+  visit-murann:
+    build:
+      context: .
+      dockerfile: ./visit-murann/Dockerfile
+    container_name: dnd_visit_murann
+    labels:
+      homepage.description: Murann visitor guide and city map
+      homepage.group: D&D
+      homepage.href: https://visit-murann.dnd.turnr.net
+      homepage.name: Visit Murann
+      traefik.enable: true
+      traefik.http.routers.dnd_visit_murann.entrypoints: public
+      traefik.http.routers.dnd_visit_murann.rule: Host(`visit-murann.dnd.turnr.net`)
+      traefik.http.routers.dnd_visit_murann.tls: true
+      traefik.http.routers.dnd_visit_murann.tls.certresolver: cloudflare
+      traefik.http.services.dnd_visit_murann.loadbalancer.server.port: 80
+    networks:
+      - web
+
   rails:
     build:
       context: ./website
