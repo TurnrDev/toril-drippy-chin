@@ -12,7 +12,7 @@
       <div class="eyebrow">The Now Capital City of Faerûn · City of Innovation</div>
       <h1>Visit Murann</h1>
       <p>Where sea lanes, spice markets, and a hundred unlikely adventures meet.</p>
-      <a class="map-link" href="#map">Explore the city map <span aria-hidden="true">↓</span></a>
+      <a class="map-link" href="assets/murann-map.png" target="_blank" rel="noopener">Open the city map <span aria-hidden="true">↗</span></a>
     </header>
 
     <main>
@@ -26,13 +26,13 @@
         <div class="map-copy">
           <p class="section-label">Visitor’s map</p>
           <h2 id="map-title">Find your way around</h2>
-          <p>Open the illustrated city map for a closer look. Scroll or pinch to zoom, then drag to explore every district.</p>
-          <button class="map-button" type="button" data-open-map>Open full-screen map</button>
+          <p>Open the original city map in a new tab to use your browser’s own zoom controls and explore every district.</p>
+          <a class="map-button" href="assets/murann-map.png" target="_blank" rel="noopener">Open map in new tab <span aria-hidden="true">↗</span></a>
         </div>
-        <button class="map-preview" type="button" data-open-map aria-label="Open the full-screen Murann city map">
+        <a class="map-preview" href="assets/murann-map.png" target="_blank" rel="noopener" aria-label="Open the Murann city map in a new tab">
           <img src="assets/murann-map.png" alt="Illustrated map of Murann">
-          <span>Click to explore <b aria-hidden="true">↗</b></span>
-        </button>
+          <span>Open original <b aria-hidden="true">↗</b></span>
+        </a>
       </section>
 
       <section class="guide" aria-label="Murann visitor highlights">
@@ -44,13 +44,5 @@
 
     <footer>Visit Murann · A city worth getting lost in</footer>
 
-    <dialog class="map-dialog" aria-labelledby="dialog-title">
-      <div class="dialog-bar">
-        <div><strong id="dialog-title">Murann city map</strong><span>Scroll or pinch to zoom · drag to pan</span></div>
-        <div class="map-controls"><button type="button" data-zoom-in aria-label="Zoom in">+</button><button type="button" data-zoom-out aria-label="Zoom out">−</button><button type="button" data-zoom-reset>Reset</button><button type="button" data-close-map aria-label="Close map">×</button></div>
-      </div>
-      <div class="map-viewport"><img src="assets/murann-map.png" alt="Detailed illustrated map of Murann" draggable="false"></div>
-    </dialog>
-    <script src="site.js"></script>
   </body>
 </html>
