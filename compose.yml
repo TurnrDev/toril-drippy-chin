@@ -19,8 +19,6 @@ services:
       traefik.enable: true
       traefik.http.routers.dnd_visit_murann.entrypoints: public-https
       traefik.http.routers.dnd_visit_murann.rule: Host(`visit-murann.dnd.turnr.net`)
-      traefik.http.routers.dnd_visit_murann.tls: true
-      traefik.http.routers.dnd_visit_murann.tls.certresolver: cloudflare
       traefik.http.services.dnd_visit_murann.loadbalancer.server.port: 80
     networks:
       - web
@@ -52,8 +50,6 @@ services:
       traefik.enable: true
       traefik.http.routers.dnd_map_rails.entrypoints: public-https
       traefik.http.routers.dnd_map_rails.rule: Host(`map.dnd.turnr.net`)
-      traefik.http.routers.dnd_map_rails.tls: true
-      traefik.http.routers.dnd_map_rails.tls.certresolver: cloudflare
       traefik.http.services.dnd_map_rails.loadbalancer.server.port: 3000
     stdin_open: true
     tty: true
@@ -108,8 +104,6 @@ services:
       traefik.enable: true
       traefik.http.routers.dnd_tiles.entrypoints: public-https
       traefik.http.routers.dnd_tiles.rule: Host(`tiles.dnd.turnr.net`)
-      traefik.http.routers.dnd_tiles.tls: true
-      traefik.http.routers.dnd_tiles.tls.certresolver: cloudflare
       traefik.http.services.dnd_tiles.loadbalancer.server.port: 80
 
 volumes:
