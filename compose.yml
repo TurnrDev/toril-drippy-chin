@@ -17,7 +17,7 @@ services:
       homepage.href: https://visit-murann.dnd.turnr.net
       homepage.name: Visit Murann
       traefik.enable: true
-      traefik.http.routers.dnd_visit_murann.entrypoints: public
+      traefik.http.routers.dnd_visit_murann.entrypoints: public-https
       traefik.http.routers.dnd_visit_murann.rule: Host(`visit-murann.dnd.turnr.net`)
       traefik.http.routers.dnd_visit_murann.tls: true
       traefik.http.routers.dnd_visit_murann.tls.certresolver: cloudflare
@@ -50,7 +50,7 @@ services:
       homepage.showStats: true
       homepage.siteMonitor: http://dnd_map_rails:8000
       traefik.enable: true
-      traefik.http.routers.dnd_map_rails.entrypoints: public
+      traefik.http.routers.dnd_map_rails.entrypoints: public-https
       traefik.http.routers.dnd_map_rails.rule: Host(`map.dnd.turnr.net`)
       traefik.http.routers.dnd_map_rails.tls: true
       traefik.http.routers.dnd_map_rails.tls.certresolver: cloudflare
@@ -106,7 +106,7 @@ services:
         condition: service_healthy
     labels:
       traefik.enable: true
-      traefik.http.routers.dnd_tiles.entrypoints: public
+      traefik.http.routers.dnd_tiles.entrypoints: public-https
       traefik.http.routers.dnd_tiles.rule: Host(`tiles.dnd.turnr.net`)
       traefik.http.routers.dnd_tiles.tls: true
       traefik.http.routers.dnd_tiles.tls.certresolver: cloudflare
