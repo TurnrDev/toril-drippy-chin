@@ -11,6 +11,7 @@ services:
       context: .
       dockerfile: ./visit-murann/Dockerfile
     container_name: dnd_visit_murann
+    restart: unless-stopped
     labels:
       homepage.description: Murann visitor guide and city map
       homepage.group: D&D
@@ -29,6 +30,7 @@ services:
     environment:
       PIDFILE: /tmp/pids/server.pid
     container_name: dnd_map_rails
+    restart: unless-stopped
     volumes:
       - ./website:/app
       # Prevent these directories from mounting so they're not shared between host OS and Docker
@@ -66,6 +68,7 @@ services:
       context: ./website
       dockerfile: docker/postgres/Dockerfile
     container_name: dnd_map_db
+    restart: unless-stopped
     environment:
       POSTGRES_HOST_AUTH_METHOD: trust
       POSTGRES_DB: openstreetmap
@@ -84,6 +87,7 @@ services:
     build:
       context: ./rendering
     container_name: dnd_tiles
+    restart: unless-stopped
     volumes:
       - ./imagery/tiles/combined:/var/www/imagery:ro
       - ./rendering/external-data.yml:/external-data.yml:ro
