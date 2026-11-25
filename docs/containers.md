@@ -10,6 +10,10 @@ run on `main`, publish successful images to GHCR:
 | `ghcr.io/turnrdev/toril-drippy-chin-renderer:latest` | Apache, renderd, configuration and the checked-out Carto style |
 | `ghcr.io/turnrdev/toril-drippy-chin-db:latest` | Existing PostgreSQL 14/PostGIS Dockerfile and initialization script |
 
+The web checks verify native gem loading, compiled assets, and clean SIGTERM
+shutdown through the Rails launcher using a tiny Rack app. Puma disables its
+post-shutdown signal exception so intentional stops return success.
+
 Each image also receives `sha-<full-commit>` and OCI source/revision/version labels.
 CI authenticates using GitHub's built-in token; no repository token secret is needed.
 New GHCR packages may need their visibility set to public for anonymous server pulls.

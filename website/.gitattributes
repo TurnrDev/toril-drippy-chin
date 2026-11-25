@@ -65,6 +65,7 @@ config/initializers/assets.rb linguist-vendored=false
 config/initializers/config.rb linguist-vendored=false
 config/initializers/doorkeeper.rb linguist-vendored=false
 config/locales/en.yml linguist-vendored=false
+config/puma.rb linguist-vendored=false
 config/settings.yml linguist-vendored=false
 config/settings/test.yml linguist-vendored=false
 docker/id-imagery.json linguist-vendored=false

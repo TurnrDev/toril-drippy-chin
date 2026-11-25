@@ -93,6 +93,34 @@ jobs:
             abort "LibGD unavailable" unless GD2::Image::TrueColor.new(2, 2).width == 2
             abort "asset manifest missing" unless File.size?("public/assets/manifest.json")
           '
+      - name: Rails graceful shutdown check
+        if: matrix.name == 'web'
+        env:
+          IMAGE: ${{ steps.image.outputs.revision }}
+        run: |
+          trap 'docker logs dnd-map-shutdown-check; docker rm -f dnd-map-shutdown-check' EXIT
+          # Exercise the Rails launcher and production Puma config with a tiny
+          # Rack app, so this check needs no production database or credentials.
+          docker run -d --name dnd-map-shutdown-check \
+            -e SECRET_KEY_BASE_DUMMY=1 \
+            -e DATABASE_URL=postgresql://localhost:1/dnd_map_build \
+            "$IMAGE" sh -ec '
+              printf "%s\n" "run ->(_env) { [200, {\"content-type\" => \"text/plain\"}, [\"ok\"]] }" > /tmp/shutdown.ru
+              exec bundle exec rails server --config /tmp/shutdown.ru --binding 0.0.0.0 --port 3000
+            '
+          ready=false
+          for _ in $(seq 1 30); do
+            if docker exec dnd-map-shutdown-check curl --fail --silent http://127.0.0.1:3000/; then
+              ready=true
+              break
+            fi
+            sleep 1
+          done
+          test "$ready" = true
+          docker stop --timeout 30 dnd-map-shutdown-check
+          status=$(docker inspect --format '{{.State.ExitCode}}' dnd-map-shutdown-check)
+          echo "Rails shutdown exit code: $status"
+          test "$status" = 0
       - name: Renderer runtime check
         if: matrix.name == 'renderer'
         env:
