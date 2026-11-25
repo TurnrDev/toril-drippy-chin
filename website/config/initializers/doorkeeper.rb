@@ -50,7 +50,10 @@ Doorkeeper.configure do
   #   end
   # end
 
-  application_class "Oauth2Application" unless Settings.status == "database_offline"
+  # Asset builds have no database and do not need OAuth model discovery.
+  unless Settings.status == "database_offline" || ENV["SECRET_KEY_BASE_DUMMY"]
+    application_class "Oauth2Application"
+  end
 
   # Enables polymorphic Resource Owner association for Access Tokens and Access Grants.
   # By default this option is disabled.

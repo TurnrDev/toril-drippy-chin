@@ -29,6 +29,9 @@ unless Object.const_defined?(:ALLOWED_STATUS)
 end
 
 Config.setup do |config|
+  # Load external deployment settings before Rails initialises the application.
+  config.extra_sources << ENV.fetch("DND_MAP_SETTINGS_FILE") if ENV["DND_MAP_SETTINGS_FILE"]
+
   # Name of the constant exposing loaded settings
   config.const_name = "Settings"
 

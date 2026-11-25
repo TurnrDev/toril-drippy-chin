@@ -5,7 +5,10 @@
 # GitHub Linguist, but exclude the rest from language statistics and diffs.
 ** linguist-vendored
 
+.dockerignore linguist-vendored=false
+.gitattributes linguist-vendored=false
 Dockerfile linguist-vendored=false
+Gemfile linguist-vendored=false
 app/assets/favicons/android-chrome-144x144.png linguist-vendored=false
 app/assets/favicons/android-chrome-192x192.png linguist-vendored=false
 app/assets/favicons/android-chrome-36x36.png linguist-vendored=false
@@ -44,6 +47,7 @@ app/controllers/users_controller.rb linguist-vendored=false
 app/helpers/open_graph_helper.rb linguist-vendored=false
 app/mailers/user_mailer.rb linguist-vendored=false
 app/models/message.rb linguist-vendored=false
+app/models/trace.rb linguist-vendored=false
 app/views/changesets/index.atom.builder linguist-vendored=false
 app/views/diary_entries/rss.rss.builder linguist-vendored=false
 app/views/layouts/_header.html.erb linguist-vendored=false
@@ -55,6 +59,11 @@ app/views/sessions/new.html.erb linguist-vendored=false
 app/views/site/about.html.erb linguist-vendored=false
 app/views/site/fixthemap.html.erb linguist-vendored=false
 app/views/traces/feeds/show.rss.builder linguist-vendored=false
+config/environments/production.rb linguist-vendored=false
+config/example.storage.yml linguist-vendored=false
+config/initializers/assets.rb linguist-vendored=false
+config/initializers/config.rb linguist-vendored=false
+config/initializers/doorkeeper.rb linguist-vendored=false
 config/locales/en.yml linguist-vendored=false
 config/settings.yml linguist-vendored=false
 config/settings/test.yml linguist-vendored=false

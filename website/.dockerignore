@@ -9,3 +9,19 @@
 /log/*
 /tmp/*
 /node_modules/
+
+# Production source context: exclude credentials and mutable application data.
+/.bundle/
+/.env*
+**/*.local.yml
+/config/database.yml
+/config/storage.yml
+/config/master.key
+/config/credentials.yml.enc
+/config/credentials/
+/storage/
+/public/assets/
+/public/attachments/
+/public/export/
+/coverage/
+/gemset.nix

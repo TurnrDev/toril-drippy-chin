@@ -3,6 +3,9 @@
 require "active_support/core_ext/integer/time"
 
 Rails.application.configure do
+  if ENV["SECRET_KEY_BASE_FILE"]
+    config.secret_key_base = File.read(ENV.fetch("SECRET_KEY_BASE_FILE")).strip
+  end
   # Settings specified here will take precedence over those in config/application.rb.
 
   # Code is not reloaded between requests.
@@ -62,7 +65,7 @@ Rails.application.configure do
   # config.active_job.queue_adapter = :resque
 
   # Configure caching of static assets
-  config.action_controller.page_cache_directory = Rails.public_path
+  config.action_controller.page_cache_directory = ENV.fetch("DND_MAP_PAGE_CACHE_DIR") { Rails.public_path }
 
   # Ignore bad email addresses and do not raise email delivery errors.
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.

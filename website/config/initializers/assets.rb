@@ -6,7 +6,11 @@
 Rails.application.config.assets.version = "1.0"
 
 # Location of manifest file.
-Rails.application.config.assets.manifest = Rails.root.join("tmp/manifest.json")
+Rails.application.config.assets.manifest = if Rails.env.production?
+                                           Rails.root.join("public/assets/manifest.json")
+                                         else
+                                           Rails.root.join("tmp/manifest.json")
+                                         end
 
 # Add additional assets to the asset load path.
 Rails.application.config.assets.paths << Rails.root.join("config")

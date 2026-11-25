@@ -308,10 +308,10 @@ class Trace < ApplicationRecord
   private
 
   def content_type(file)
-    file_type = Open3.capture2("/usr/bin/file", "-Lb", file).first.chomp
+    file_type = Open3.capture2("file", "-Lb", file).first.chomp
 
     case file_type
-    when /\bcompressed data,/ then file_type = Open3.capture2("/usr/bin/file", "-Lbz", file).first.chomp
+    when /\bcompressed data,/ then file_type = Open3.capture2("file", "-Lbz", file).first.chomp
     end
 
     case file_type

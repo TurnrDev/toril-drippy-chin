@@ -1,0 +1,128 @@
+name: Container images
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - website/**
+      - rendering/**
+      - .gitmodules
+      - .github/workflows/images.yml
+  pull_request:
+    paths:
+      - website/**
+      - rendering/**
+      - .gitmodules
+      - .github/workflows/images.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: images-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    permissions:
+      contents: read
+      packages: write
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - name: web
+            context: website
+            file: website/Dockerfile
+            target: production
+          - name: renderer
+            context: rendering
+            file: rendering/Dockerfile
+            target: ""
+          - name: db
+            context: website
+            file: website/docker/postgres/Dockerfile
+            target: ""
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          submodules: true
+      - uses: docker/setup-buildx-action@v4
+      - name: Image names
+        id: image
+        env:
+          REPOSITORY: ${{ github.repository }}
+          COMPONENT: ${{ matrix.name }}
+        run: |
+          image="ghcr.io/${REPOSITORY,,}-${COMPONENT}"
+          echo "name=$image" >> "$GITHUB_OUTPUT"
+          echo "revision=$image:sha-$GITHUB_SHA" >> "$GITHUB_OUTPUT"
+      - name: Build
+        uses: docker/build-push-action@v7
+        with:
+          context: ${{ matrix.context }}
+          file: ${{ matrix.file }}
+          target: ${{ matrix.target }}
+          platforms: linux/amd64
+          load: true
+          tags: ${{ steps.image.outputs.revision }}
+          labels: |
+            org.opencontainers.image.source=https://github.com/${{ github.repository }}
+            org.opencontainers.image.revision=${{ github.sha }}
+            org.opencontainers.image.version=sha-${{ github.sha }}
+          cache-from: type=gha,scope=${{ matrix.name }}
+          cache-to: type=gha,mode=max,scope=${{ matrix.name }}
+      - name: Rails runtime check
+        if: matrix.name == 'web'
+        env:
+          IMAGE: ${{ steps.image.outputs.revision }}
+        run: |
+          docker run --rm "$IMAGE" bundle exec rails --version
+          docker run --rm "$IMAGE" bundle exec ruby -e '
+            require "pg"
+            require "rgeo"
+            require "vips"
+            require "gd2-ffij"
+            require "puma"
+            require "mini_racer"
+            abort "GEOS unavailable" unless RGeo::Geos.supported?
+            abort "V8 unavailable" unless MiniRacer::Context.new.eval("6 * 7") == 42
+            abort "LibGD unavailable" unless GD2::Image::TrueColor.new(2, 2).width == 2
+            abort "asset manifest missing" unless File.size?("public/assets/manifest.json")
+          '
+      - name: Renderer runtime check
+        if: matrix.name == 'renderer'
+        env:
+          IMAGE: ${{ steps.image.outputs.revision }}
+        run: |
+          docker run --rm --entrypoint sh "$IMAGE" -ec '
+            apache2ctl configtest
+            test -s /project.xml
+            test -d /patterns
+            test -d /symbols
+            test -s /etc/renderd.conf
+          '
+      - name: Database runtime check
+        if: matrix.name == 'db'
+        env:
+          IMAGE: ${{ steps.image.outputs.revision }}
+        run: docker run --rm "$IMAGE" postgres --version
+      - name: Log in to GHCR
+        if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+        uses: docker/login-action@v4
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Publish tested image
+        if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+        env:
+          IMAGE: ${{ steps.image.outputs.revision }}
+          LATEST: ${{ steps.image.outputs.name }}:latest
+        run: |
+          docker tag "$IMAGE" "$LATEST"
+          docker push "$IMAGE"
+          docker push "$LATEST"

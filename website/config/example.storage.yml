@@ -4,4 +4,4 @@ test:
 
 local:
   service: Disk
-  root: <%= Rails.root.join("storage") %>
+  root: <%= ENV.fetch("DND_MAP_STORAGE_DIR") { Rails.root.join("storage") } %>

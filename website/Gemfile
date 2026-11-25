@@ -4,6 +4,7 @@ source "https://rubygems.org"
 
 # Require rails
 gem "rails", "~> 8.1.0"
+gem "puma"
 gem "turbo-rails"
 
 # Use postgres+postgis as the database
@@ -184,7 +185,6 @@ group :test do
   gem "minitest"
   gem "minitest-focus", :require => false
   gem "minitest-mock"
-  gem "puma"
   gem "rails-controller-testing"
   gem "rubocop"
   gem "rubocop-capybara"

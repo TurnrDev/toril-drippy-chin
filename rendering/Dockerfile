@@ -28,3 +28,12 @@ COPY entrypoint.sh /usr/local/bin/entrypoint.sh
 RUN chmod +x /usr/local/bin/entrypoint.sh
 
 CMD ["/usr/local/bin/entrypoint.sh"]
+
+# Production images carry the style/configuration previously bind-mounted by Compose.
+COPY external-data.yml /external-data.yml
+COPY openstreetmap-carto /openstreetmap-carto
+COPY openstreetmap-carto/patterns /patterns
+COPY openstreetmap-carto/symbols /symbols
+COPY project.mml /openstreetmap-carto/project.mml
+COPY project.xml /project.xml
+COPY renderd.conf /etc/renderd.conf

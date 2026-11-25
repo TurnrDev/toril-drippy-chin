@@ -9,6 +9,7 @@ services:
   rails:
     build:
       context: ./website
+      target: development
     environment:
       PIDFILE: /tmp/pids/server.pid
     container_name: dnd_map_rails
